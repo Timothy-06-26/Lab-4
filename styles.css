@@ -21,11 +21,6 @@ h1{
     font-size: 20px;
 }
 
-#greeting{
-    color:beige;
-    margin: 0 0 16px;
-}
-
 label {
     display: block;
     margin: 12px 0 4px;
@@ -39,7 +34,7 @@ select{
     margin-top: 10px;
     border-radius: 8px;
     cursor: pointer;
-    color:bisque;
+    color:darkgoldenrod;
 }
 
 #findBtn { background: orange; 
