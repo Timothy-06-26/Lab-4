@@ -21,7 +21,7 @@ const dishes = [
 
 // What the page remembers between clicks
 
-const defaultState = {
+const state = {
     current: null, //Current dish
     skipped: [], // names of dish skipped
     eaten: 0, // how many suggestions were accepted
@@ -38,7 +38,7 @@ function getMeal() {
     if (hour < 11) return "breakfast";
     if (hour < 15) return "lunch";
     if (hour < 21) return "dinner";
-    return "latenight"
+    return "latenight";
 }
 
 function show(css, emoji, title, details, canChoose) {
@@ -65,17 +65,38 @@ function suggest() {
   if (state.skipped.length >= 3) {
     state.skipped = [];
     state.current = null;
-    show("fatigue", "Maybe you are not actually hungry", "You said no three times. Just get a pizza.", false);
+    show("fatigue", "👎🏽" ,"Maybe you are not actually hungry", "You said no three times. Just get a pizza.", false);
   } else if (matches.length === 0 && state.skipped.length > 0) {
     state.current = null;
-    show("empty", "Well thats everything", "You skipped everything that fits. Change a filter.", false);
+    show("empty","😒", "Well thats everything", "You skipped everything that fits. Change a filter.", false);
   } else if (matches.length === 0) {
     state.current = null;
-    show("nomatch",  "You are very picky", "Try a bigger budget or a different size.", false);
+    show("nomatch","🤔",  "You are very picky", "Try a bigger budget or a different size.", false);
   } else {
     state.current = matches[Math.floor(Math.random() * matches.length)];
     const d = state.current;
     show("dish", d.emoji, d.name, "$".repeat(d.price) + " · " + d.size + " · " + (d.veg ? "vegetarian" : "contains meat"), true);
   }
 }
+
+//For buttons
+$("findBtn").addEventListener("click", () => {
+  state.skipped = [];
+  suggest();
+});
+
+$("skipBtn").addEventListener("click", () => {
+  state.skipped.push(state.current.name);
+  suggest();
+});
+
+$("yesBtn").addEventListener("click", () => {
+  state.eaten++;
+  show("dish", "😋", "Enjoy your " + state.current.name + "!", "Press Find my food for another idea.", false);
+  $("stats").textContent = "Last meal you chose: " + state.current.name;
+  updateText();
+});
+
+$("meal").addEventListener("change", updateText);
+updateText();
 
