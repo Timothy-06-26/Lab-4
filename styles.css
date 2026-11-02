@@ -1,0 +1,93 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: cornsilk;
+    margin: 0;
+    padding: 24px 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.app{
+    background: white;
+    max-width: 460px;
+    width: 100%;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+h1{
+    margin: 0 0 4px;
+    font-size: 20px;
+}
+
+#greeting{
+    color:beige;
+    margin: 0 0 16px;
+}
+
+label {
+    display: block;
+    margin: 12px 0 4px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+select{
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    color:bisque;
+}
+
+#findBtn { background: orange; 
+margin-top: 19px;}
+
+#findBtn:hover { background: rgb(224, 101, 0);}
+#yesBtn { background: green;}
+#skipBtn {background: grey;}
+
+#result {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center; 
+    display: none;
+}
+
+#result {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+}
+
+#emoji{
+    font-size: 20px;
+}
+
+#dishName{
+    margin: 6px 0;
+}
+
+#details{
+    color: grey;
+    margin: 0;
+}
+
+/* Outcome colours for the Javascript */
+
+.dish { background: lightcyan;}
+.fatigue {background: lightpink}
+.nomatch{ background: lightsalmon;}
+.empty {background: lightskyblue;}
+
+#stats{
+    margin-top: 18px;
+    font-size: 20px;
+    color: grey;
+    text-align: center;
+}
