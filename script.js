@@ -51,3 +51,31 @@ function show(css, emoji, title, details, canChoose) {
     $("skipBtn").hidden = !canChoose;
 }
 
+function suggest() {
+  const meal = getMeal();
+  const matches = dishes.filter(d =>
+    d.meals.includes(meal) &&
+    ($("size").value === "any" || d.size === $("size").value) &&
+    ($("diet").value === "any" || d.veg) &&
+    d.price <= Number($("budget").value) &&
+    !state.skipped.includes(d.name)
+  );
+
+  // Conditional logic: 4 possible outcomes
+  if (state.skipped.length >= 3) {
+    state.skipped = [];
+    state.current = null;
+    show("fatigue", "Maybe you are not actually hungry", "You said no three times. Just get a pizza.", false);
+  } else if (matches.length === 0 && state.skipped.length > 0) {
+    state.current = null;
+    show("empty", "Well thats everything", "You skipped everything that fits. Change a filter.", false);
+  } else if (matches.length === 0) {
+    state.current = null;
+    show("nomatch",  "You are very picky", "Try a bigger budget or a different size.", false);
+  } else {
+    state.current = matches[Math.floor(Math.random() * matches.length)];
+    const d = state.current;
+    show("dish", d.emoji, d.name, "$".repeat(d.price) + " · " + d.size + " · " + (d.veg ? "vegetarian" : "contains meat"), true);
+  }
+}
+
